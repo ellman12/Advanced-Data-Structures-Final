@@ -1,8 +1,9 @@
 ﻿namespace ADS_Final;
 
-public class HashSet
+public class HashSet<T>
 {
-    private int capacity;
+    private int capacity; //Size of array
+    private int count; //How many indexes have a value.
     private readonly string[] array;
 
     public HashSet(int capacity)
