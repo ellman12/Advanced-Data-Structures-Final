@@ -4,28 +4,30 @@ public class HashSet<T>
 {
     private int capacity; //Size of array
     private int count; //How many indexes have a value.
-    private readonly string[] array;
+    private readonly T[] array;
 
     public HashSet(int capacity)
     {
         this.capacity = capacity * 2;
-        array = new string[this.capacity];
+        array = new T[this.capacity];
     }
 
-    public void Add(string value)
+    public void Add(T value)
     {
-        int index = Math.Abs(value.GetHashCode() % array.Length);
-        if (String.IsNullOrWhiteSpace(array[index])) //If nothing there fair game to store it there.
+        int index = Math.Abs(value!.GetHashCode() % array.Length);
+        if (array[index] != null) //If nothing there fair game to store it there.
             array[index] = value;
         else //Find empty index
         {
-            while (!String.IsNullOrWhiteSpace(array[index]))
+            while (array[index] != null)
             {
                 index++;
                 if (index > array.Length - 1)
                     index = 0;
             }
+
             array[index] = value;
+            count++;
         }
     }
 

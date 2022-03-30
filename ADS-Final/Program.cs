@@ -23,11 +23,8 @@
 //
 // Console.WriteLine(dupeAmt);
 
-
-using ADS_Final;
-
-string[] paths = Directory.GetFiles("C:/xampp/htdocs", "*.*", SearchOption.AllDirectories);
-HashSet hashSet = new(paths.Length);
+string[] paths = Directory.GetFiles("C:/Users/Elliott/Documents/GitHub", "*.*", SearchOption.AllDirectories);
+ADS_Final.HashSet<string> hashSet = new(paths.Length);
 foreach(string path in paths)
 {
     string filename = Path.GetFileName(path.Replace('\\', '/'));
