@@ -39,4 +39,10 @@ Console.WriteLine($"HashSet has count {hashSet.Count} and capacity {hashSet.Capa
 Console.WriteLine($"Searching for \"README.md\": {hashSet.Find("README.md")}");
 Console.WriteLine($"Searching for \"asasasasasas\": {hashSet.Find("asasasasasas")}");
 Console.WriteLine($"Contains() for \"README.md\": {hashSet.Contains("README.md")}");
+Console.WriteLine($"Contains() for \"asasasasasas\": {hashSet.Contains("asasasasasas")}\n\n");
+
+Console.WriteLine($"Removing \"README.md\": {hashSet.Remove("README.md")}");
+Console.WriteLine($"Contains() for \"README.md\": {hashSet.Contains("README.md")}");
+Console.WriteLine($"Removing \"asasasasasas\": {hashSet.Remove("asasasasasas")}");
 Console.WriteLine($"Contains() for \"asasasasasas\": {hashSet.Contains("asasasasasas")}");
+Console.WriteLine($"HashSet has count {hashSet.Count} and capacity {hashSet.Capacity} and took {s.ElapsedMilliseconds} ms");

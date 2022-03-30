@@ -15,7 +15,6 @@ public class HashSet<T>
     private int Hash(T value) => Math.Abs(value!.GetHashCode() % array.Length);
 
     ///<summary>Adds a value to the HashSet.</summary>
-    ///<param name="value">The thing to add.</param>
     ///<returns>True if the value was added, false if it was already in the HashSet and thus wasn't added.</returns>
     public bool Add(T value)
     {
@@ -46,8 +45,17 @@ public class HashSet<T>
         return true;
     }
 
-    public void Remove(string value)
+    /// <summary>Remove the value from the HashSet.</summary>
+    /// <returns>True if removed, false if wasn't found and thus nothing to remove.</returns>
+    public bool Remove(T value)
     {
+        int index = Find(value);
+        if (index == -1) return false;
+
+        array[index] = default(T);
+        Count--;
+        
+        return true;
     }
 
     ///<summary>Find index where value is located. Returns -1 if can't find.</summary>
