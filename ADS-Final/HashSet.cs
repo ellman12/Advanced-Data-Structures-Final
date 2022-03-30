@@ -2,18 +2,19 @@
 
 public class HashSet<T>
 {
-    private int capacity; //Size of array
-    private int count; //How many indexes have a value.
-    private readonly List<T> array;
+    public int capacity; //Size of array
+    public int count; //How many indexes have a value.
+    private readonly T[] array;
 
     public HashSet(int capacity)
     {
-        array = new List<T>(capacity);
+        this.capacity = capacity;
+        array = new T[this.capacity];
     }
 
     public void Add(T value)
     {
-        int index = Math.Abs(value!.GetHashCode() % array.Count);
+        int index = Math.Abs(value!.GetHashCode() % array.Length);
         if (array[index] != null) //If nothing there fair game to store it there.
             array[index] = value;
         else //Find empty index
@@ -21,7 +22,7 @@ public class HashSet<T>
             while (array[index] != null)
             {
                 index++;
-                if (index > array.Count - 1)
+                if (index > array.Length - 1)
                     index = 0;
             }
 

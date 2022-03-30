@@ -31,3 +31,5 @@ foreach(string path in paths)
     hashSet.Add(filename);
     // Console.WriteLine($"{filename}\t{filename.GetHashCode()}\t{Math.Abs(filename.GetHashCode() % paths.Length)}");
 }
+
+Console.WriteLine($"HashSet has count {hashSet.count} and capacity {hashSet.capacity}");
