@@ -1,4 +1,4 @@
-﻿namespace ADS_Final;
+namespace ADS_Final;
 
 public class HashSet<T>
 {
@@ -56,7 +56,7 @@ public class HashSet<T>
         bool loopedAround = false; //If start index all the way to the end of the array didn't contain value, start at front and mark this so don't get infinite loop.
         int index = Hash(value); //Where we start our search. Because of potential for collisions, may or may not be where 'value' is located.
 
-        while (!Equals(array[index], value))
+        while (array[index] != null && !Equals(array[index], value))
         {
             index++;
             if (index > array.Length - 1)
