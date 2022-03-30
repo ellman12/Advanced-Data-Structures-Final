@@ -67,8 +67,5 @@ public class HashSet<T>
         return index;
     }
 
-    public bool Contains(T value)
-    {
-        return false;
-    }
+    public bool Contains(T value) => Find(value) != -1;
 }

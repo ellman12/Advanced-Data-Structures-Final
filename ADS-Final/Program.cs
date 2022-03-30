@@ -39,3 +39,5 @@ s.Stop();
 Console.WriteLine($"HashSet has count {hashSet.Count} and capacity {hashSet.Capacity} and took {s.ElapsedMilliseconds} ms");
 Console.WriteLine($"Searching for \"README.md\": {hashSet.Find("README.md")}");
 Console.WriteLine($"Searching for \"asasasasasas\": {hashSet.Find("asasasasasas")}");
+Console.WriteLine($"Contains() for \"README.md\": {hashSet.Contains("README.md")}");
+Console.WriteLine($"Contains() for \"asasasasasas\": {hashSet.Contains("asasasasasas")}");
