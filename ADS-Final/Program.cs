@@ -1,18 +1,24 @@
-﻿using System.Diagnostics;
-
-Stopwatch s = Stopwatch.StartNew();
-string[] paths = Directory.GetFiles("C:/Users/Elliott/Videos/tmp/GitHub Backup 3-27-2022 5;30;28 PM", "*.*", SearchOption.AllDirectories);
-s.Stop();
-Console.WriteLine($"Took {s.ElapsedMilliseconds} ms to get all {paths.Length} paths");
-
+﻿string[] paths = Directory.GetFiles("D:/My Backups/Sorted Pics and Vids From Phone, Switch, and Elsewhere 3-21-2022", "*.*", SearchOption.AllDirectories);
 HashSet<string> hashSet = new(paths.Length);
-s = Stopwatch.StartNew();
 foreach(string path in paths)
 {
-    hashSet.Add(path.Replace('\\', '/'));
+    string filename = Path.GetFileName(path.Replace('\\', '/'));
+    hashSet.Add(filename);
+    Console.WriteLine($"{filename}\t{filename.GetHashCode()}\t{Math.Abs(filename.GetHashCode() % paths.Length)}");
 }
-s.Stop();
-Console.WriteLine($"Took {s.ElapsedMilliseconds} ms to add all {paths.Length} paths");
 
-Console.WriteLine(hashSet.Contains("C:/Users/Elliott/Videos/tmp/GitHub Backup 3-27-2022 5;30;28 PM"));
-Console.WriteLine(hashSet.Contains("C:/Users/Elliott/Videos/tmp/GitHub Backup 3-27-2022 5;30;28 PM/Graphical-Photo-Organizer/README.md"));
+// string[] paths = Directory.GetFiles("D:/My Backups/Sorted Pics and Vids From Phone, Switch, and Elsewhere 3-21-2022", "*.*", SearchOption.AllDirectories);
+// List<uint> hashes = new(paths.Length);
+// uint dupeAmt = 0;
+// foreach (string path in paths)
+// {
+//     uint hash = (uint) Math.Abs(Path.GetFileName(path).GetHashCode() % paths.Length);
+//     if (hashes.Contains(hash))
+//     {
+//         Console.WriteLine("dupe");
+//         dupeAmt++;
+//     }
+//     hashes.Add(hash);
+// }
+//
+// Console.WriteLine(dupeAmt);
