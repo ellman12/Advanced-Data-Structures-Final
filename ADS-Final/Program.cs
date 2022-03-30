@@ -29,11 +29,12 @@ string[] paths = Directory.GetFiles("C:/Users/Elliott/Documents/GitHub", "*.*", 
 // ADS_Final.HashSet<string> hashSet = new(paths.Length);
 ADS_Final.HashSet<string> hashSet = new(20);
 Stopwatch s = Stopwatch.StartNew();
-foreach(string path in paths)
+foreach (string path in paths)
 {
     string filename = Path.GetFileName(path.Replace('\\', '/'));
     hashSet.Add(filename);
 }
+
 s.Stop();
 Console.WriteLine($"HashSet has count {hashSet.Count} and capacity {hashSet.Capacity} and took {s.ElapsedMilliseconds} ms");
 Console.WriteLine($"Searching for \"README.md\": {hashSet.Find("README.md")}");
@@ -46,3 +47,8 @@ Console.WriteLine($"Contains() for \"README.md\": {hashSet.Contains("README.md")
 Console.WriteLine($"Removing \"asasasasasas\": {hashSet.Remove("asasasasasas")}");
 Console.WriteLine($"Contains() for \"asasasasasas\": {hashSet.Contains("asasasasasas")}");
 Console.WriteLine($"HashSet has count {hashSet.Count} and capacity {hashSet.Capacity} and took {s.ElapsedMilliseconds} ms");
+
+ADS_Final.HashSet<int> ints = new(20);
+for (int i = 0; i < ints.Capacity; i++)
+    ints.Add(i);
+ints.Remove(10);
