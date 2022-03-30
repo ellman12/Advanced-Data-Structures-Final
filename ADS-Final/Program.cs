@@ -37,3 +37,5 @@ foreach(string path in paths)
 }
 s.Stop();
 Console.WriteLine($"HashSet has count {hashSet.Count} and capacity {hashSet.Capacity} and took {s.ElapsedMilliseconds} ms");
+Console.WriteLine($"Searching for \"README.md\": {hashSet.Find("README.md")}");
+Console.WriteLine($"Searching for \"asasasasasas\": {hashSet.Find("asasasasasas")}");
