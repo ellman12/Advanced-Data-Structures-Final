@@ -14,8 +14,13 @@ public class HashSet<T>
 
     private int Hash(T value) => Math.Abs(value!.GetHashCode() % array.Length);
 
-    public void Add(T value)
+    ///<summary>Adds a value to the HashSet.</summary>
+    ///<param name="value">The thing to add.</param>
+    ///<returns>True if the value was added, false if it was already in the HashSet and thus wasn't added.</returns>
+    public bool Add(T value)
     {
+        if (Contains(value)) return false;
+
         Count++;
         if (Count > array.Length)
         {
@@ -37,6 +42,8 @@ public class HashSet<T>
 
             array[index] = value;
         }
+
+        return true;
     }
 
     public void Remove(string value)

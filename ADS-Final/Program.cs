@@ -33,7 +33,6 @@ foreach(string path in paths)
 {
     string filename = Path.GetFileName(path.Replace('\\', '/'));
     hashSet.Add(filename);
-    // Console.WriteLine($"{filename}\t{filename.GetHashCode()}\t{Math.Abs(filename.GetHashCode() % paths.Length)}");
 }
 s.Stop();
 Console.WriteLine($"HashSet has count {hashSet.Count} and capacity {hashSet.Capacity} and took {s.ElapsedMilliseconds} ms");
