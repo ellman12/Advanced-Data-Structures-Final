@@ -23,13 +23,17 @@
 //
 // Console.WriteLine(dupeAmt);
 
+using System.Diagnostics;
+
 string[] paths = Directory.GetFiles("C:/Users/Elliott/Documents/GitHub", "*.*", SearchOption.AllDirectories);
-ADS_Final.HashSet<string> hashSet = new(paths.Length);
+// ADS_Final.HashSet<string> hashSet = new(paths.Length);
+ADS_Final.HashSet<string> hashSet = new(20);
+Stopwatch s = Stopwatch.StartNew();
 foreach(string path in paths)
 {
     string filename = Path.GetFileName(path.Replace('\\', '/'));
     hashSet.Add(filename);
     // Console.WriteLine($"{filename}\t{filename.GetHashCode()}\t{Math.Abs(filename.GetHashCode() % paths.Length)}");
 }
-
-Console.WriteLine($"HashSet has count {hashSet.count} and capacity {hashSet.capacity}");
+s.Stop();
+Console.WriteLine($"HashSet has count {hashSet.Count} and capacity {hashSet.Capacity} and took {s.ElapsedMilliseconds} ms");
