@@ -1,11 +1,11 @@
-﻿string[] paths = Directory.GetFiles("D:/My Backups/Sorted Pics and Vids From Phone, Switch, and Elsewhere 3-21-2022", "*.*", SearchOption.AllDirectories);
-HashSet<string> hashSet = new(paths.Length);
-foreach(string path in paths)
-{
-    string filename = Path.GetFileName(path.Replace('\\', '/'));
-    hashSet.Add(filename);
-    Console.WriteLine($"{filename}\t{filename.GetHashCode()}\t{Math.Abs(filename.GetHashCode() % paths.Length)}");
-}
+﻿// string[] paths = Directory.GetFiles("D:/My Backups/Sorted Pics and Vids From Phone, Switch, and Elsewhere 3-21-2022", "*.*", SearchOption.AllDirectories);
+// HashSet<string> hashSet = new(paths.Length);
+// foreach(string path in paths)
+// {
+//     string filename = Path.GetFileName(path.Replace('\\', '/'));
+//     hashSet.Add(filename);
+//     Console.WriteLine($"{filename}\t{filename.GetHashCode()}\t{Math.Abs(filename.GetHashCode() % paths.Length)}");
+// }
 
 // string[] paths = Directory.GetFiles("D:/My Backups/Sorted Pics and Vids From Phone, Switch, and Elsewhere 3-21-2022", "*.*", SearchOption.AllDirectories);
 // List<uint> hashes = new(paths.Length);
@@ -22,3 +22,15 @@ foreach(string path in paths)
 // }
 //
 // Console.WriteLine(dupeAmt);
+
+
+using ADS_Final;
+
+string[] paths = Directory.GetFiles("C:/xampp/htdocs", "*.*", SearchOption.AllDirectories);
+HashSet hashSet = new(paths.Length);
+foreach(string path in paths)
+{
+    string filename = Path.GetFileName(path.Replace('\\', '/'));
+    hashSet.Add(filename);
+    // Console.WriteLine($"{filename}\t{filename.GetHashCode()}\t{Math.Abs(filename.GetHashCode() % paths.Length)}");
+}
