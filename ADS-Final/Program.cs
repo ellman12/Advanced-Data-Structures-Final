@@ -25,7 +25,7 @@
 
 using System.Diagnostics;
 
-string[] paths = Directory.GetFiles("C:/Users/Elliott/Documents/GitHub", "*.*", SearchOption.AllDirectories);
+string[] paths = Directory.GetFiles("C:/Users/Elliott/Documents/GitHub/AutoHotkey", "*.*", SearchOption.AllDirectories);
 // ADS_Final.HashSet<string> hashSet = new(paths.Length);
 ADS_Final.HashSet<string> hashSet = new(20);
 Stopwatch s = Stopwatch.StartNew();

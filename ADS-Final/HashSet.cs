@@ -82,5 +82,22 @@ public class HashSet<T>
         return index;
     }
 
+    ///<summary>Remove everything from HashSet and shrink it.</summary>
+    public void Clear()
+    {
+        //TODO: test clear and print
+        Count = 0;
+        Capacity = 10;
+        array = new T[Capacity];
+    }
+
+    ///<summary>Print all elements of the HashSet, starting at startIndex.</summary>
+    public void Print(int startIndex = 0)
+    {
+     //TODO: idiot proof start index   
+        for (int i = startIndex; i < array.Length; i++)
+            Console.WriteLine(array[i]);
+    }
+
     public bool Contains(T value) => Find(value) != -1;
 }
