@@ -46,8 +46,12 @@ ints.Print(false);
 
 for (int i = 0; i < 20; i++) ints.Add(i);
 ints.Print(false);
-ints.Clear();
-ints.Print(false);
+// ints.Clear();
+// ints.Print(false);
 
 ints.Remove(5);
+ints.Remove(5);
+ints.Remove(30);
+ints.Remove(0);
+ints.Remove(16);
 ints.Print(false);
