@@ -4,15 +4,20 @@ public class HashSet<T>
 {
 	public int Capacity; //Size of array
 	public int Count; //How many indexes have a value.
-	private T[] array;
+	private LinkedList<T>?[] array;
 
 	public HashSet(int capacity)
 	{
 		Capacity = capacity;
-		array = new T[Capacity];
+		array = new LinkedList<T>?[Capacity];
+		for (int i = 0; i < array.Length; i++)
+			array[i] = new LinkedList<T>();
 	}
 
 	private int Hash(T value) => Math.Abs(value!.GetHashCode() % array.Length);
+
+	///<summary>Returns true if the HashSet contains this value.</summary>
+	public bool Contains(T value) => array[Hash(value)]!.Contains(value);
 
 	///<summary>Adds a value to the HashSet.</summary>
 	///<returns>True if the value was added, false if it was already in the HashSet and thus wasn't added.</returns>
@@ -25,22 +30,13 @@ public class HashSet<T>
 		{
 			Capacity *= 2;
 			Array.Resize(ref array, Capacity);
+			for (int i = 0; i < array.Length; i++) //Create new Lists at new indexes (i.e., if any indexes null, make new lists at those indexes).
+				array[i] ??= new LinkedList<T>();
 		}
 
-		int index = Hash(value);
-		if (array[index] != null) //If nothing there fair game to store it there.
-			array[index] = value;
-		else //Find empty index
-		{
-			while (array[index] != null)
-			{
-				index++;
-				if (index > array.Length - 1)
-					index = 0;
-			}
-
-			array[index] = value;
-		}
+		int insertIndex = Hash(value);
+		if (!array[insertIndex]!.Contains(value))
+			array[insertIndex]!.AddLast(value);
 
 		return true;
 	}
@@ -49,37 +45,12 @@ public class HashSet<T>
 	///<returns>True if removed, false if wasn't found and thus nothing to remove.</returns>
 	public bool Remove(T value)
 	{
-		int index = Find(value);
-		if (index == -1) return false;
+		if (!Contains(value)) return false;
 
-		array[index] = default!;
+		int removeIndex = Hash(value);
+		array[removeIndex]!.Remove(value);
 		Count--;
-
 		return true;
-	}
-
-	///<summary>Find index where value is located. Returns -1 if can't find.</summary>
-	public int Find(T value)
-	{
-		bool loopedAround = false; //If start index all the way to the end of the array didn't contain value, start at front and mark this so don't get infinite loop.
-		int index = Hash(value); //Where we start our search. Because of potential for collisions, may or may not be where 'value' is located.
-
-		while (!Equals(array[index], value))
-		{
-			index++;
-			if (index > array.Length - 1)
-			{
-				if (!loopedAround)
-				{
-					index = 0;
-					loopedAround = true;
-				}
-				else
-					return -1;
-			}
-		}
-
-		return index;
 	}
 
 	///<summary>Remove everything from HashSet and shrink it.</summary>
@@ -87,7 +58,9 @@ public class HashSet<T>
 	{
 		Count = 0;
 		Capacity = 4;
-		array = new T[Capacity];
+		array = new LinkedList<T>?[Capacity];
+		for (int i = 0; i < array.Length; i++)
+			array[i] = new LinkedList<T>();
 	}
 
 	///<summary>Print all elements of the HashSet, starting at startIndex.</summary>
@@ -97,16 +70,19 @@ public class HashSet<T>
 
 		if (newLine)
 		{
-			for (int i = startIndex; i < array.Length; i++)
-				Console.WriteLine(array[i]);
+			foreach (LinkedList<T>? linkedList in array)
+			{
+				foreach (T T in linkedList!) Console.WriteLine(T);
+			}
 		}
 		else
 		{
-			for (int i = startIndex; i < array.Length; i++)
-				Console.Write($"{array[i]} ");
+			foreach (LinkedList<T>? linkedList in array)
+			{
+				foreach (T T in linkedList!) Console.Write($"{T} ");
+			}
+
 			Console.WriteLine();
 		}
 	}
-
-	public bool Contains(T value) => Find(value) != -1;
 }
