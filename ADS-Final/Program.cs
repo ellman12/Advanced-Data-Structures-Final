@@ -25,18 +25,19 @@
 
 using System.Diagnostics;
 
-// string[] paths = Directory.GetFiles("C:/Users/Elliott/Documents/GitHub/", "*.*", SearchOption.AllDirectories);
-// ADS_Final.HashSet<string> hashSet = new(paths.Length);
-// Stopwatch s = Stopwatch.StartNew();
-// foreach (string path in paths)
-// {
-    // string filename = Path.GetFileName(path.Replace('\\', '/'));
-    // hashSet.Add(filename);
-// }
+string[] paths = Directory.GetFiles("C:/Users/Elliott/Documents/GitHub/", "*.*", SearchOption.AllDirectories);
+ADS_Final.HashSet<string> hashSet = new(paths.Length);
+Stopwatch s = Stopwatch.StartNew();
+foreach (string path in paths)
+{
+    string filename = Path.GetFileName(path.Replace('\\', '/'));
+    hashSet.Add(filename);
+}
 
-// s.Stop();
-// Console.WriteLine($"HashSet has count {hashSet.Count} and capacity {hashSet.Capacity} and took {s.ElapsedMilliseconds} ms.");
+s.Stop();
+Console.WriteLine($"HashSet has count {hashSet.Count} and capacity {hashSet.Capacity} and took {s.ElapsedMilliseconds} ms.");
 
+// /*
 ADS_Final.HashSet<int> ints = new(20);
 
 for (int i = 0; i < 20; i++) ints.Add(i);
@@ -55,3 +56,13 @@ ints.Remove(30);
 ints.Remove(0);
 ints.Remove(16);
 ints.Print(false);
+
+ints.Add(30);
+ints.Add(-10);
+ints.Add(-69);
+ints.Add(-0);
+ints.Add(0);
+ints.Add(0);
+ints.Add(0);
+ints.Print(false);
+// */
