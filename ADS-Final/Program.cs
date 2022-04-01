@@ -25,7 +25,7 @@
 
 using System.Diagnostics;
 
-string[] paths = Directory.GetFiles("C:/Users/Elliott/Documents/GitHub/AutoHotkey", "*.*", SearchOption.AllDirectories);
+string[] paths = Directory.GetFiles("C:/Users/Elliott/Documents/GitHub/Learning-Unity", "*.*", SearchOption.AllDirectories);
 // ADS_Final.HashSet<string> hashSet = new(paths.Length);
 ADS_Final.HashSet<string> hashSet = new(20);
 Stopwatch s = Stopwatch.StartNew();
@@ -48,7 +48,14 @@ Console.WriteLine($"Removing \"asasasasasas\": {hashSet.Remove("asasasasasas")}"
 Console.WriteLine($"Contains() for \"asasasasasas\": {hashSet.Contains("asasasasasas")}");
 Console.WriteLine($"HashSet has count {hashSet.Count} and capacity {hashSet.Capacity} and took {s.ElapsedMilliseconds} ms");
 
-ADS_Final.HashSet<int> ints = new(20);
-for (int i = 0; i < ints.Capacity; i++)
-    ints.Add(i);
-ints.Remove(10);
+// ADS_Final.HashSet<int> ints = new(20);
+//
+// for (int i = 0; i < 20; i++) ints.Add(i);
+// ints.Print(false);
+// ints.Clear();
+// ints.Print(false);
+//
+// for (int i = 0; i < 20; i++) ints.Add(i);
+// ints.Print(false);
+// ints.Clear();
+// ints.Print(false);
