@@ -31,20 +31,15 @@ public class HashSet<T>
 		for (int i = 0; i < array.Length; i++) //Create new Lists at new indexes (i.e., if any indexes null, make new lists at those indexes).
 			array[i] ??= new LinkedList<T>();
 	}
+
 	///<summary>Adds a value to the HashSet.</summary>
 	///<returns>True if the value was added, false if it was already in the HashSet and thus wasn't added.</returns>
 	public bool Add(T value)
 	{
+		ResizeArray();
 		if (Contains(value)) return false;
 
 		Count++;
-		if (Count > array.Length)
-		{
-			Capacity *= 2;
-			Array.Resize(ref array, Capacity);
-			for (int i = 0; i < array.Length; i++) //Create new Lists at new indexes (i.e., if any indexes null, make new lists at those indexes).
-				array[i] ??= new LinkedList<T>();
-		}
 
 		int insertIndex = Hash(value);
 		if (!array[insertIndex]!.Contains(value))
