@@ -42,6 +42,7 @@ public class HashSet<T>
 			if (list == null) continue;
 			if (list.Contains(value)) return true;
 		}
+
 		return false;
 	}
 
@@ -140,6 +141,7 @@ public class HashSet<T>
 			if (list == null) continue;
 			foreach (T item in list) union.Add(item);
 		}
+
 		foreach (LinkedList<T>? list in other.array)
 		{
 			if (list == null) continue;
@@ -189,4 +191,10 @@ public class HashSet<T>
 
 		return difference;
 	}
+
+	///<summary>Returns a new HashSet with all of the elements in at least one of the sets this-other or other-this. Basically xor of the 2 sets.</summary>
+	///<param name="other">The other set to use.</param>
+	///<exception cref="ArgumentException">Thrown if sets aren't of the same type.</exception>
+	///<remarks>Symmetric difference can be thought of as the union of A-B and B-A (i.e., A-B ∪ B-A). This is what this method does.</remarks>
+	public HashSet<T> SymmetricDifferenceWith(HashSet<T> other) => DifferenceWith(other).UnionWith(other.DifferenceWith(this));
 }

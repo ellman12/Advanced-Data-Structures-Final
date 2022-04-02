@@ -116,7 +116,7 @@ ADS_Final.HashSet<int> set1 = new(new []{4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 1
 ADS_Final.HashSet<int> set2 = new(new []{2, 3, 4, 5, 6});
 set1.Print(false);
 set2.Print(false);
-ADS_Final.HashSet<int> union = set1.DifferenceWith(set2);
-union.Print(false);
+ADS_Final.HashSet<int> newSet = set1.SymmetricDifferenceWith(set2);
+newSet.Print(false);
 yes.Stop();
 Console.WriteLine(yes.Elapsed);
