@@ -1,4 +1,4 @@
-namespace ADS_Final;
+﻿namespace ADS_Final;
 
 public class HashSet<T>
 {
@@ -129,5 +129,26 @@ public class HashSet<T>
 			if (list == null) continue;
 			foreach (T item in list) Add(item);
 		}
+	}
+
+	///<summary>Performs intersection set operation, creating and returning a new HashSet with only the values in both HashSets.</summary>
+	///<param name="other">The other set to use for intersection.</param>
+	///<returns>A new HashSet with the intersection of the other HashSet and this HashSet.</returns>
+	///<exception cref="ArgumentException">Thrown if sets aren't of the same type.</exception>
+	public HashSet<T> IntersectWith(HashSet<T> other)
+	{
+		if (GetType() != other.GetType()) throw new ArgumentException("Both HashSets need to be of the same type.");
+
+		HashSet<T> intersection = new();
+
+		foreach (LinkedList<T>? list in array)
+		{
+			if (list == null) continue;
+			foreach (T item in list)
+				if (other.Contains(item))
+					intersection.Add(item);
+		}
+
+		return intersection;
 	}
 }

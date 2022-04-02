@@ -1,4 +1,4 @@
-// string[] paths = Directory.GetFiles("D:/My Backups/Sorted Pics and Vids From Phone, Switch, and Elsewhere 3-21-2022", "*.*", SearchOption.AllDirectories);
+﻿// string[] paths = Directory.GetFiles("D:/My Backups/Sorted Pics and Vids From Phone, Switch, and Elsewhere 3-21-2022", "*.*", SearchOption.AllDirectories);
 // HashSet<string> hashSet = new(paths.Length);
 // foreach(string path in paths)
 // {
@@ -69,46 +69,53 @@ ints.Print(false);
 
 using System.Diagnostics;
 
-ADS_Final.HashSet<int> set1 = new(10);
-set1.Add(0);
-set1.Add(2);
-set1.Add(4);
-set1.Add(6);
-set1.Add(8);
-set1.Add(10);
+// ADS_Final.HashSet<int> set1 = new(10);
+// set1.Add(0);
+// set1.Add(2);
+// set1.Add(4);
+// set1.Add(6);
+// set1.Add(8);
+// set1.Add(10);
+//
+// ADS_Final.HashSet<int> set2 = new(10);
+// set2.Add(1);
+// set2.Add(3);
+// set2.Add(5);
+// set2.Add(7);
+// set2.Add(9);
+// set2.Add(11);
+//
+// set1.Print(false);
+// set2.Print(false);
+// set1.UnionWith(set2);
+// set1.Print(false);
+//
+// ADS_Final.HashSet<string> strings1 = new(5);
+// strings1.Add("a");
+// strings1.Add("b");
+// strings1.Add("c");
+// strings1.Add("d");
+// strings1.Add("e");
+// strings1.Print(false);
+// ADS_Final.HashSet<string> strings2 = new(0);
+// strings2.Add("e");
+// strings2.Add("f");
+// strings2.Add("g");
+// strings2.Print(false);
+// strings1.UnionWith(strings2);
+// strings1.Print(false);
+//
+// Stopwatch yes = Stopwatch.StartNew();
+// set1.Add(new[] {20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 293829, 32844, 9883298});
+// // strings2.Contains("f");
+// yes.Stop();
+// Console.WriteLine(yes.Elapsed);
+// Console.WriteLine(yes.ElapsedMilliseconds);
+// set1.Print(false);
 
-ADS_Final.HashSet<int> set2 = new(10);
-set2.Add(1);
-set2.Add(3);
-set2.Add(5);
-set2.Add(7);
-set2.Add(9);
-set2.Add(11);
-
+ADS_Final.HashSet<int> set1 = new(new []{4});
+ADS_Final.HashSet<int> set2 = new(new []{3, 4, 5, 6, 7});
 set1.Print(false);
 set2.Print(false);
-set1.UnionWith(set2);
-set1.Print(false);
-
-ADS_Final.HashSet<string> strings1 = new(5);
-strings1.Add("a");
-strings1.Add("b");
-strings1.Add("c");
-strings1.Add("d");
-strings1.Add("e");
-strings1.Print(false);
-ADS_Final.HashSet<string> strings2 = new(0);
-strings2.Add("e");
-strings2.Add("f");
-strings2.Add("g");
-strings2.Print(false);
-strings1.UnionWith(strings2);
-strings1.Print(false);
-
-Stopwatch yes = Stopwatch.StartNew();
-set1.Add(new[] {20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 293829, 32844, 9883298});
-// strings2.Contains("f");
-yes.Stop();
-Console.WriteLine(yes.Elapsed);
-Console.WriteLine(yes.ElapsedMilliseconds);
-set1.Print(false);
+ADS_Final.HashSet<int> intersect = set1.IntersectWith(set2);
+intersect.Print(false);
