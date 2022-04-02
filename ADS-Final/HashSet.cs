@@ -22,6 +22,16 @@ public class HashSet<T>
 			array[i] = new LinkedList<T>();
 	}
 
+	public HashSet(IEnumerable<T> items)
+	{
+		Capacity = 16;
+		array = new LinkedList<T>?[Capacity];
+		for (int i = 0; i < array.Length; i++)
+			array[i] = new LinkedList<T>();
+
+		foreach (T item in items) Add(item);
+	}
+
 	private int Hash(T value) => Math.Abs(value!.GetHashCode() % array.Length);
 
 	///<summary>Returns true if the HashSet contains this value.</summary>
