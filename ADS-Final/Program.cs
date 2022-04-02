@@ -1,4 +1,4 @@
-﻿// string[] paths = Directory.GetFiles("D:/My Backups/Sorted Pics and Vids From Phone, Switch, and Elsewhere 3-21-2022", "*.*", SearchOption.AllDirectories);
+// string[] paths = Directory.GetFiles("D:/My Backups/Sorted Pics and Vids From Phone, Switch, and Elsewhere 3-21-2022", "*.*", SearchOption.AllDirectories);
 // HashSet<string> hashSet = new(paths.Length);
 // foreach(string path in paths)
 // {
@@ -67,6 +67,8 @@ ints.Add(0);
 ints.Print(false);
 */
 
+using System.Diagnostics;
+
 ADS_Final.HashSet<int> set1 = new(10);
 set1.Add(0);
 set1.Add(2);
@@ -102,3 +104,11 @@ strings2.Add("g");
 strings2.Print(false);
 strings1.UnionWith(strings2);
 strings1.Print(false);
+
+Stopwatch yes = Stopwatch.StartNew();
+set1.Add(new[] {20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 293829, 32844, 9883298});
+// strings2.Contains("f");
+yes.Stop();
+Console.WriteLine(yes.Elapsed);
+Console.WriteLine(yes.ElapsedMilliseconds);
+set1.Print(false);

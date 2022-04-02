@@ -1,10 +1,18 @@
-﻿namespace ADS_Final;
+namespace ADS_Final;
 
 public class HashSet<T>
 {
 	public int Capacity; //Size of array
 	public int Count; //How many indexes have a value.
 	private LinkedList<T>?[] array;
+
+	public HashSet()
+	{
+		Capacity = 4;
+		array = new LinkedList<T>?[Capacity];
+		for (int i = 0; i < array.Length; i++)
+			array[i] = new LinkedList<T>();
+	}
 
 	public HashSet(int capacity)
 	{
@@ -46,6 +54,12 @@ public class HashSet<T>
 			array[insertIndex]!.AddLast(value);
 
 		return true;
+	}
+
+	///<summary>Add a range of items to the HashSet.</summary>
+	public void Add(IEnumerable<T> items)
+	{
+		foreach (T item in items) Add(item);
 	}
 
 	///<summary>Remove the value from the HashSet.</summary>
