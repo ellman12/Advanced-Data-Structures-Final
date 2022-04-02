@@ -197,4 +197,26 @@ public class HashSet<T>
 	///<exception cref="ArgumentException">Thrown if sets aren't of the same type.</exception>
 	///<remarks>Symmetric difference can be thought of as the union of A-B and B-A (i.e., A-B ∪ B-A). This is what this method does.</remarks>
 	public HashSet<T> SymmetricDifferenceWith(HashSet<T> other) => DifferenceWith(other).UnionWith(other.DifferenceWith(this));
+
+	///<summary>Compare the 2 HashSets and if they both contain the same values (regardless of where in the arrays they are), return true. False otherwise.</summary>
+	public static bool operator ==(HashSet<T> a, HashSet<T> b)
+	{
+		if (a.Count != b.Count) return false;
+
+		foreach (LinkedList<T>? list in a.array)
+		{
+			if (list == null) continue;
+			foreach (T item in list)
+				if (!list.Contains(item)) return false;
+		}
+		foreach (LinkedList<T>? list in b.array)
+		{
+			if (list == null) continue;
+			foreach (T item in list)
+				if (!list.Contains(item)) return false;
+		}
+		return true;
+	}
+
+	public static bool operator !=(HashSet<T> a, HashSet<T> b) => !(a == b);
 }
