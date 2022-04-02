@@ -1,4 +1,4 @@
-﻿namespace ADS_Final;
+namespace ADS_Final;
 
 public class HashSet<T>
 {
@@ -35,7 +35,15 @@ public class HashSet<T>
 	private int Hash(T value) => Math.Abs(value!.GetHashCode() % array.Length);
 
 	///<summary>Returns true if the HashSet contains this value.</summary>
-	public bool Contains(T value) => array[Hash(value)]!.Contains(value);
+	public bool Contains(T value)
+	{
+		foreach (LinkedList<T>? list in array)
+		{
+			if (list == null) continue;
+			if (list.Contains(value)) return true;
+		}
+		return false;
+	}
 
 	///<summary>Resizes array if necessary.</summary>
 	private void ResizeArray()
