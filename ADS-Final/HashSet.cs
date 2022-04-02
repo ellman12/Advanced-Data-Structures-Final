@@ -1,4 +1,4 @@
-﻿namespace ADS_Final;
+namespace ADS_Final;
 
 public class HashSet<T>
 {
@@ -19,6 +19,18 @@ public class HashSet<T>
 	///<summary>Returns true if the HashSet contains this value.</summary>
 	public bool Contains(T value) => array[Hash(value)]!.Contains(value);
 
+	///<summary>Resizes array if necessary.</summary>
+	private void ResizeArray()
+	{
+		if (Capacity == 0)
+			Capacity = 6;
+		else if (Count > array.Length)
+			Capacity *= 2;
+
+		Array.Resize(ref array, Capacity);
+		for (int i = 0; i < array.Length; i++) //Create new Lists at new indexes (i.e., if any indexes null, make new lists at those indexes).
+			array[i] ??= new LinkedList<T>();
+	}
 	///<summary>Adds a value to the HashSet.</summary>
 	///<returns>True if the value was added, false if it was already in the HashSet and thus wasn't added.</returns>
 	public bool Add(T value)
