@@ -105,17 +105,18 @@ using System.Diagnostics;
 // strings1.UnionWith(strings2);
 // strings1.Print(false);
 //
-// Stopwatch yes = Stopwatch.StartNew();
+Stopwatch yes = Stopwatch.StartNew();
 // set1.Add(new[] {20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 293829, 32844, 9883298});
 // // strings2.Contains("f");
-// yes.Stop();
 // Console.WriteLine(yes.Elapsed);
 // Console.WriteLine(yes.ElapsedMilliseconds);
 // set1.Print(false);
 
-ADS_Final.HashSet<int> set1 = new(new []{4, 10, 12, 13});
-ADS_Final.HashSet<int> set2 = new(new []{3, 4, 5, 6, 7});
+ADS_Final.HashSet<int> set1 = new(new []{4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15});
+ADS_Final.HashSet<int> set2 = new(new []{2, 3, 4, 5, 6});
 set1.Print(false);
 set2.Print(false);
-ADS_Final.HashSet<int> union = set1.UnionWith(set2);
+ADS_Final.HashSet<int> union = set1.DifferenceWith(set2);
 union.Print(false);
+yes.Stop();
+Console.WriteLine(yes.Elapsed);

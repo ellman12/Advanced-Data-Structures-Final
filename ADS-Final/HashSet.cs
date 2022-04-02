@@ -1,4 +1,4 @@
-﻿namespace ADS_Final;
+namespace ADS_Final;
 
 public class HashSet<T>
 {
@@ -168,5 +168,25 @@ public class HashSet<T>
 		}
 
 		return intersection;
+	}
+
+	///<summary>Returns a new HashSet with all the items from the first set that are NOT in the other set.</summary>
+	///<param name="other">The other set to use.</param>
+	///<exception cref="ArgumentException">Thrown if sets aren't of the same type.</exception>
+	public HashSet<T> DifferenceWith(HashSet<T> other)
+	{
+		if (GetType() != other.GetType()) throw new ArgumentException("Both HashSets need to be of the same type.");
+
+		HashSet<T> difference = new();
+
+		foreach (LinkedList<T>? list in array)
+		{
+			if (list == null) continue;
+			foreach (T item in list)
+				if (!other.Contains(item))
+					difference.Add(item);
+		}
+
+		return difference;
 	}
 }
