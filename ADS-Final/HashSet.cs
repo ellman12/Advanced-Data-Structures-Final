@@ -1,4 +1,4 @@
-namespace ADS_Final;
+﻿namespace ADS_Final;
 
 public class HashSet<T>
 {
@@ -128,15 +128,25 @@ public class HashSet<T>
 	///<summary>Performs union set operation, adding everything from HashSet other to this set.</summary>
 	///<param name="other">The set with elements to add to this one.</param>
 	///<exception cref="ArgumentException">Thrown if sets aren't of the same type.</exception>
-	public void UnionWith(HashSet<T> other)
+	public HashSet<T> UnionWith(HashSet<T> other)
 	{
 		if (GetType() != other.GetType()) throw new ArgumentException("Both HashSets need to be of the same type.");
 
+		HashSet<T> union = new();
+
+		//Add items from both HashSet to the one returned.
+		foreach (LinkedList<T>? list in array)
+		{
+			if (list == null) continue;
+			foreach (T item in list) union.Add(item);
+		}
 		foreach (LinkedList<T>? list in other.array)
 		{
 			if (list == null) continue;
-			foreach (T item in list) Add(item);
+			foreach (T item in list) union.Add(item);
 		}
+
+		return union;
 	}
 
 	///<summary>Performs intersection set operation, creating and returning a new HashSet with only the values in both HashSets.</summary>

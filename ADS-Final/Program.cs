@@ -113,9 +113,9 @@ using System.Diagnostics;
 // Console.WriteLine(yes.ElapsedMilliseconds);
 // set1.Print(false);
 
-ADS_Final.HashSet<int> set1 = new(new []{4});
+ADS_Final.HashSet<int> set1 = new(new []{4, 10, 12, 13});
 ADS_Final.HashSet<int> set2 = new(new []{3, 4, 5, 6, 7});
 set1.Print(false);
 set2.Print(false);
-ADS_Final.HashSet<int> intersect = set1.IntersectWith(set2);
-intersect.Print(false);
+ADS_Final.HashSet<int> union = set1.UnionWith(set2);
+union.Print(false);
