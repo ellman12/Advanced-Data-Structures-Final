@@ -114,10 +114,17 @@ Stopwatch yes = Stopwatch.StartNew();
 
 ADS_Final.HashSet<int> set1 = new(new[] {4, 12, 13, 14, 15});
 ADS_Final.HashSet<int> set2 = new(new[] {4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15});
-set1.Print(false);
-set2.Print(false);
-ADS_Final.HashSet<int> newSet = set1.SymmetricDifferenceWith(set2);
-newSet.Print(false);
-Console.WriteLine(set1 == set2);
+// set1.Print(false);
+// set2.Print(false);
+// ADS_Final.HashSet<int> newSet = set1.SymmetricDifferenceWith(set2);
+// newSet.Print(false);
+// Console.WriteLine(set1 == set2);
+
+List<int> list = set2.GetEnumerable().ToList();
+foreach (int i in list)
+{
+	Console.WriteLine(i);
+}
+
 yes.Stop();
 Console.WriteLine(yes.Elapsed);

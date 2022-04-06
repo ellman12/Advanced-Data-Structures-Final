@@ -219,4 +219,16 @@ public class HashSet<T>
 	}
 
 	public static bool operator !=(HashSet<T> a, HashSet<T> b) => !(a == b);
+
+	///<summary>Returns all the values in this HashSet as an unsorted IEnumerable.</summary>
+	public IEnumerable<T> GetEnumerable()
+	{
+		List<T> returnedList = new();
+
+		foreach (LinkedList<T>? linkedList in array)
+		foreach (T T in linkedList!)
+			returnedList.Add(T);
+
+		return returnedList;
+	}
 }
