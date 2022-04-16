@@ -2,8 +2,8 @@ namespace ADS_Final;
 
 public class HashSet<T>
 {
-	public int Capacity; //Size of array
-	public int Count; //How many indexes have a value.
+	public int Capacity { get; private set; } //Size of array
+	public int Count { get; private set; } //How many indexes have a value.
 	private LinkedList<T>?[] array;
 
 	public HashSet()
