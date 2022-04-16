@@ -103,11 +103,9 @@ public class HashSet<T>
 			array[i] = new LinkedList<T>();
 	}
 
-	///<summary>Print all elements of the HashSet, starting at startIndex.</summary>
-	public void Print(bool newLine = true, int startIndex = 0)
+	///<summary>Print all elements of the HashSet</summary>
+	public void Print(bool newLine = false)
 	{
-		if (startIndex < 0 || startIndex > array.Length) throw new ArgumentOutOfRangeException(nameof(startIndex));
-
 		if (newLine)
 		{
 			foreach (LinkedList<T>? linkedList in array)
