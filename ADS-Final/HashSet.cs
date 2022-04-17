@@ -44,13 +44,8 @@ public class HashSet<T>
 	public bool Add(T value)
 	{
 		if (Contains(value)) return false;
-
 		Count++;
-
-		int insertIndex = Hash(value);
-		if (!array[insertIndex].Contains(value))
-			array[insertIndex].AddLast(value);
-
+		array[Hash(value)].AddLast(value);
 		return true;
 	}
 
@@ -65,9 +60,7 @@ public class HashSet<T>
 	public bool Remove(T value)
 	{
 		if (!Contains(value)) return false;
-
-		int removeIndex = Hash(value);
-		array[removeIndex].Remove(value);
+		array[Hash(value)].Remove(value);
 		Count--;
 		return true;
 	}
@@ -76,7 +69,6 @@ public class HashSet<T>
 	public void Clear()
 	{
 		Count = 0;
-		Capacity = 4;
 		array = new LinkedList<T>[Capacity];
 		for (int i = 0; i < array.Length; i++)
 			array[i] = new LinkedList<T>();
@@ -88,17 +80,12 @@ public class HashSet<T>
 		if (newLine)
 		{
 			foreach (LinkedList<T> linkedList in array)
-			{
-				foreach (T T in linkedList) Console.WriteLine(T);
-			}
+				foreach (T value in linkedList) Console.WriteLine(value);
 		}
 		else
 		{
 			foreach (LinkedList<T> linkedList in array)
-			{
-				foreach (T T in linkedList) Console.Write($"{T} ");
-			}
-
+				foreach (T value in linkedList) Console.Write($"{value} ");
 			Console.WriteLine();
 		}
 	}
@@ -114,14 +101,10 @@ public class HashSet<T>
 
 		//Add items from both HashSet to the one returned.
 		foreach (LinkedList<T> list in array)
-		{
 			foreach (T item in list) union.Add(item);
-		}
 
 		foreach (LinkedList<T> list in other.array)
-		{
 			foreach (T item in list) union.Add(item);
-		}
 
 		return union;
 	}
@@ -201,8 +184,8 @@ public class HashSet<T>
 		List<T> returnedList = new();
 
 		foreach (LinkedList<T> linkedList in array)
-		foreach (T T in linkedList)
-			returnedList.Add(T);
+		foreach (T value in linkedList)
+			returnedList.Add(value);
 
 		return returnedList;
 	}
