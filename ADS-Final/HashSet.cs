@@ -4,12 +4,13 @@ public class HashSet<T>
 {
 	public int Capacity { get; private set; } //Size of array
 	public int Count { get; private set; } //How many indexes have a value.
-	private LinkedList<T>?[] array;
+	private LinkedList<T>[] array; //Array is fixed size but the LinkedLists are not.
+	private const int DEFAULT_CAPACITY = 20;
 
 	public HashSet()
 	{
-		Capacity = 4;
-		array = new LinkedList<T>?[Capacity];
+		Capacity = DEFAULT_CAPACITY;
+		array = new LinkedList<T>[Capacity];
 		for (int i = 0; i < array.Length; i++)
 			array[i] = new LinkedList<T>();
 	}
@@ -17,60 +18,38 @@ public class HashSet<T>
 	public HashSet(int capacity)
 	{
 		Capacity = capacity;
-		array = new LinkedList<T>?[Capacity];
+		array = new LinkedList<T>[Capacity];
 		for (int i = 0; i < array.Length; i++)
 			array[i] = new LinkedList<T>();
 	}
 
 	public HashSet(IEnumerable<T> items)
 	{
-		Capacity = 16;
-		array = new LinkedList<T>?[Capacity];
+		Capacity = DEFAULT_CAPACITY;
+		array = new LinkedList<T>[Capacity];
 		for (int i = 0; i < array.Length; i++)
 			array[i] = new LinkedList<T>();
 
 		foreach (T item in items) Add(item);
 	}
 
+	///Get the index of the LinkedList where this item should be stored.
 	private int Hash(T value) => Math.Abs(value!.GetHashCode() % array.Length);
 
 	///<summary>Returns true if the HashSet contains this value.</summary>
-	public bool Contains(T value)
-	{
-		foreach (LinkedList<T>? list in array)
-		{
-			if (list == null) continue;
-			if (list.Contains(value)) return true;
-		}
-
-		return false;
-	}
-
-	///<summary>Resizes array if necessary.</summary>
-	private void ResizeArray()
-	{
-		if (Capacity == 0)
-			Capacity = 6;
-		else if (Count > array.Length)
-			Capacity *= 2;
-
-		Array.Resize(ref array, Capacity);
-		for (int i = 0; i < array.Length; i++) //Create new Lists at new indexes (i.e., if any indexes null, make new lists at those indexes).
-			array[i] ??= new LinkedList<T>();
-	}
+	public bool Contains(T value) => array[Hash(value)].Contains(value);
 
 	///<summary>Adds a value to the HashSet.</summary>
 	///<returns>True if the value was added, false if it was already in the HashSet and thus wasn't added.</returns>
 	public bool Add(T value)
 	{
-		ResizeArray();
 		if (Contains(value)) return false;
 
 		Count++;
 
 		int insertIndex = Hash(value);
-		if (!array[insertIndex]!.Contains(value))
-			array[insertIndex]!.AddLast(value);
+		if (!array[insertIndex].Contains(value))
+			array[insertIndex].AddLast(value);
 
 		return true;
 	}
@@ -88,7 +67,7 @@ public class HashSet<T>
 		if (!Contains(value)) return false;
 
 		int removeIndex = Hash(value);
-		array[removeIndex]!.Remove(value);
+		array[removeIndex].Remove(value);
 		Count--;
 		return true;
 	}
@@ -98,7 +77,7 @@ public class HashSet<T>
 	{
 		Count = 0;
 		Capacity = 4;
-		array = new LinkedList<T>?[Capacity];
+		array = new LinkedList<T>[Capacity];
 		for (int i = 0; i < array.Length; i++)
 			array[i] = new LinkedList<T>();
 	}
@@ -108,16 +87,16 @@ public class HashSet<T>
 	{
 		if (newLine)
 		{
-			foreach (LinkedList<T>? linkedList in array)
+			foreach (LinkedList<T> linkedList in array)
 			{
-				foreach (T T in linkedList!) Console.WriteLine(T);
+				foreach (T T in linkedList) Console.WriteLine(T);
 			}
 		}
 		else
 		{
-			foreach (LinkedList<T>? linkedList in array)
+			foreach (LinkedList<T> linkedList in array)
 			{
-				foreach (T T in linkedList!) Console.Write($"{T} ");
+				foreach (T T in linkedList) Console.Write($"{T} ");
 			}
 
 			Console.WriteLine();
@@ -134,15 +113,13 @@ public class HashSet<T>
 		HashSet<T> union = new();
 
 		//Add items from both HashSet to the one returned.
-		foreach (LinkedList<T>? list in array)
+		foreach (LinkedList<T> list in array)
 		{
-			if (list == null) continue;
 			foreach (T item in list) union.Add(item);
 		}
 
-		foreach (LinkedList<T>? list in other.array)
+		foreach (LinkedList<T> list in other.array)
 		{
-			if (list == null) continue;
 			foreach (T item in list) union.Add(item);
 		}
 
@@ -159,9 +136,8 @@ public class HashSet<T>
 
 		HashSet<T> intersection = new();
 
-		foreach (LinkedList<T>? list in array)
+		foreach (LinkedList<T> list in array)
 		{
-			if (list == null) continue;
 			foreach (T item in list)
 				if (other.Contains(item))
 					intersection.Add(item);
@@ -179,9 +155,8 @@ public class HashSet<T>
 
 		HashSet<T> difference = new();
 
-		foreach (LinkedList<T>? list in array)
+		foreach (LinkedList<T> list in array)
 		{
-			if (list == null) continue;
 			foreach (T item in list)
 				if (!other.Contains(item))
 					difference.Add(item);
@@ -201,18 +176,20 @@ public class HashSet<T>
 	{
 		if (a.Count != b.Count) return false;
 
-		foreach (LinkedList<T>? list in a.array)
+		foreach (LinkedList<T> list in a.array)
 		{
-			if (list == null) continue;
 			foreach (T item in list)
-				if (!list.Contains(item)) return false;
+				if (!list.Contains(item))
+					return false;
 		}
-		foreach (LinkedList<T>? list in b.array)
+
+		foreach (LinkedList<T> list in b.array)
 		{
-			if (list == null) continue;
 			foreach (T item in list)
-				if (!list.Contains(item)) return false;
+				if (!list.Contains(item))
+					return false;
 		}
+
 		return true;
 	}
 
@@ -223,8 +200,8 @@ public class HashSet<T>
 	{
 		List<T> returnedList = new();
 
-		foreach (LinkedList<T>? linkedList in array)
-		foreach (T T in linkedList!)
+		foreach (LinkedList<T> linkedList in array)
+		foreach (T T in linkedList)
 			returnedList.Add(T);
 
 		return returnedList;
